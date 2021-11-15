@@ -17,20 +17,20 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/login', function () {
-    return view('login');
+    return view('auth/login');
 });
 Route::get('/logout', function () {
-    return view('logout');
+    return view('auth/logout');
 });
 Route::get('/catalog', function () {
-    return view('catalog');
+    return view('catalog/index');
 });
 Route::get('/catalog/show/{id}', function ($id) {
-    return view('showFilm');
+    return view('catalog/show', array('id'=>$id));
 });
 Route::get('/catalog/create', function () {
-    return view('addFilm');
+    return view('catalog/create');
 });
 Route::get('/catalog/edit/{id}', function ($id) {
-    return view('editFilm');
+    return view('catalog/edit', array('id'=>$id));
 });
