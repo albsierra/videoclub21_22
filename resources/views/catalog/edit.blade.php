@@ -3,7 +3,7 @@
 
 @section('content')
 
-	Modificar película {id}
+	Modificar película {{ $id ?? '' }}
 
 @stop
 
