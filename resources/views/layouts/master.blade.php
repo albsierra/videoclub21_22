@@ -11,10 +11,10 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1><?php @include('partials.navbar')?></h1>
+    <h1>@include('partials.navbar')</h1>
 
     <div class="container">
-        <?php @yield('content')?>
+        @yield('content')
     </div>
 
     <!-- Optional JavaScript -->
