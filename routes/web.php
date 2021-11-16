@@ -18,11 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('login', function () {
-    return 'auth.login';
+    return view ('auth.login');
 });
 
 Route::get('logout', function () {
-    return view ('Logout usuario');
+    return 'Logout usuario';
 });
 
 Route::get('catalog', function () {
