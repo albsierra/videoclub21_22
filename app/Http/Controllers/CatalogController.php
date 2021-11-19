@@ -34,10 +34,11 @@ class CatalogController extends Controller
         return view('catalog.create');
     }
     /**
-     * Editar película
+     * Editar Película
      * @param  int  $id
      * @return Response
      */
+
     public function getEdit($id){
         return view('catalog.edit',
         array(
