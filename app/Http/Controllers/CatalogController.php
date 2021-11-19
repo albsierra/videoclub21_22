@@ -39,7 +39,11 @@ class CatalogController extends Controller
      * @return Response
      */
     public function getEdit($id){
-        return view('catalog.edit', array('id'=>$id));
+        return view('catalog.edit',
+        array(
+            'id'=>$id,
+            'pelicula' => $this->arrayPeliculas[$id]),
+        );
     }
     private $arrayPeliculas = array(
 		array(
