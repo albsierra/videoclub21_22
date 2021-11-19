@@ -25,10 +25,11 @@ Route::get('/logout', function () {
     return ('Logout usuario');
 });
 
-Route::get('/catalog', [CatalogController::class, 'getIndex']);
+Route::group(['prefix' => 'catalog'], function () {
+    Route::get('/', [CatalogController::class, 'getIndex']);
+    Route::get('/show/{id}', [CatalogController::class, 'getShow']);
+    Route::get('/create', [CatalogController::class, 'getCreate']);
+    Route::post('/create', [CatalogController::class, 'getCreate']);
+    Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
+});
 
-Route::get('/catalog/show/{id}', [CatalogController::class, 'getShow']);
-
-Route::get('/catalog/create', [CatalogController::class, 'getCreate']);
-
-Route::get('/catalog/edit/{id}', [CatalogController::class, 'getEdit']);
