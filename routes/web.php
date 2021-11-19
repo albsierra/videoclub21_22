@@ -27,7 +27,14 @@ Route::get('/logout', function () {
 
 Route::group(['prefix' => 'catalog'], function () {
     Route::get('/', [CatalogController::class, 'getIndex']);
+    Route::post('/', [CatalogController::class, 'getIndex']);
+
     Route::get('/show/{id}', [CatalogController::class, 'getShow']);
+    Route::post('/show/{id}', [CatalogController::class, 'getShow']);
+
     Route::get('/create', [CatalogController::class, 'getCreate']);
+    Route::post('/create', [CatalogController::class, 'getCreate']);
+
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
+    Route::post('/edit/{id}', [CatalogController::class, 'getEdit']);
 });
