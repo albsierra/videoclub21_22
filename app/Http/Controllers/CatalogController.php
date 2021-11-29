@@ -30,10 +30,11 @@ class CatalogController extends Controller
 
     public function getEdit($id)
     {
+        $pelicula = Movie::find($id);
         return view('catalog.edit',
         array(
             'id' => $id,
-            'pelicula' => $this->arrayPeliculas[$id]));
+            'pelicula' => $pelicula));
     }
 
 
