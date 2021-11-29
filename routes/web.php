@@ -24,6 +24,7 @@ Route::group(['prefix' => 'catalog'], function () {
     Route::get('/show/{id}', [CatalogController::class, 'getShow']);
 
     Route::get('/create', [CatalogController::class, 'getCreate']);
+    Route::put('/create', [CatalogController::class, 'getCreate']);
 
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
 
