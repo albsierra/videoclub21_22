@@ -35,4 +35,5 @@ class CatalogController extends Controller
             'pelicula' => $pelicula));
     }
 
+
 }

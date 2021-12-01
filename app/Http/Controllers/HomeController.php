@@ -7,11 +7,22 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Pagina principal de la aplicacion
-     * @return Response
+     * Create a new controller instance.
+     *
+     * @return void
      */
-    public function getHome()
+    public function __construct()
     {
-        return redirect()->action([CatalogController::class, 'getIndex']);
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }
