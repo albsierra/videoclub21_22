@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Movie;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,9 +17,19 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         self::seedCatalog();
+        self::seedUser();
         $this->command->info('Tabla catálogo inicializada con datos!');
     }
 
+    private static function seedUser(){
+        User::truncate();
+        \App\Models\User::factory(2)->create(); // Añadir 2 registros de usuarios
+        $admin = new User();
+        $admin ->name=env('ADMIN_NAME'); // coge el nombre que esta en el fichero .env
+        $admin ->email=env('ADMIN_EMAIL');
+        $admin->password = bcrypt(env('ADMIN_PASSWORD'));
+        $admin->save();
+    }
 
     private static function seedCatalog()
     {
