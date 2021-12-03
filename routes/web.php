@@ -14,20 +14,23 @@ use App\Http\Controllers\CatalogController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'auth'], function() {
 
-Route::get('/', [HomeController::class, 'getHome']);
+    Route::get('/', [HomeController::class, 'getHome']);
+    Route::get('/home', [HomeController::class, 'getHome']);
+    Route::group(['prefix' => 'catalog'], function () {
 
-Route::group(['prefix' => 'catalog'], function () {
+        Route::get('/', [CatalogController::class, 'getIndex']);
 
-    Route::get('/', [CatalogController::class, 'getIndex']);
+        Route::get('/show/{id}', [CatalogController::class, 'getShow']);
 
-    Route::get('/show/{id}', [CatalogController::class, 'getShow']);
+        Route::get('/create', [CatalogController::class, 'getCreate']);
+        Route::post('/create', [CatalogController::class, 'postCreate']);
 
-    Route::get('/create', [CatalogController::class, 'getCreate']);
-    Route::put('/create', [CatalogController::class, 'getCreate']);
+        Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
+        Route::put('/edit/{id}', [CatalogController::class, 'putEdit']);
 
-    Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
-
+    });
 });
 
 Route::get('/login', function () {
@@ -38,6 +41,6 @@ Route::get('/logout', function () {
     return ('Logout usuario');
 });
 
-Auth::routes();
+require __DIR__.'/auth.php';
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
