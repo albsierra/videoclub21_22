@@ -10,7 +10,7 @@
           </div>
           <div class="card-body" style="padding:30px">
 
-             <form action="{{ url('/catalog/create') }}" method="POST">
+             <form action="{{ url('/catalog/edit',array('id' => $pelicula->id )) }}" method="POST">
                 {{method_field('PUT')}}
 	            @csrf
 
@@ -45,7 +45,7 @@
                 </button>
              </div>
 
-             {{-- TODO: Cerrar formulario --}}
+             </form>
 
           </div>
        </div>

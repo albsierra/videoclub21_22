@@ -25,4 +25,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function getHome(){
+        return redirect()->action([CatalogController::class,'getIndex']);
+    }
 }

@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="row" style="margin-top:40px">
+
     <div class="offset-md-3 col-md-6">
        <div class="card">
           <div class="card-header text-center">
@@ -10,6 +11,9 @@
           </div>
           <div class="card-body" style="padding:30px">
 
+        <form action="{{ url('/catalog/create') }}" method="post">
+
+                @csrf
 
              <div class="form-group">
                 <label for="title">Título</label>
@@ -42,7 +46,7 @@
                 </button>
              </div>
 
-             {{-- TODO: Cerrar formulario --}}
+            </form>
 
           </div>
        </div>
