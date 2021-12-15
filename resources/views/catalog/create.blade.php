@@ -10,7 +10,7 @@
           </div>
           <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/catalog/create') }}" method="post">
+            <form action="{{ url('/catalog/create') }}" method="post" enctype="multipart/form-data">
                 @csrf
              <div class="form-group">
                 <label for="title">Título</label>
@@ -28,10 +28,9 @@
             </div>
 
             <div class="form-group">
-                <label for="title">P&oacute;ster</label>
-               <input type="text" name="poster" id="poster" class="form-control">
+                <label for="avatar">Seleccionar imagen del poster:</label>
+                <input type="file" id="poster" name="poster">
             </div>
-
              <div class="form-group">
                 <label for="synopsis">Resumen</label>
                 <textarea name="synopsis" id="synopsis" class="form-control" rows="3"></textarea>

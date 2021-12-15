@@ -10,7 +10,7 @@
           </div>
           <div class="card-body" style="padding:30px">
 
-             <form action="{{ url('/catalog/edit', array('id' => $pelicula->id)) }}" method="POST">
+             <form action="{{ url('/catalog/edit', array('id' => $pelicula->id)) }}" method="POST" enctype="multipart/form-data">
                 {{method_field('PUT')}}
 	            @csrf
 
@@ -30,8 +30,9 @@
             </div>
 
             <div class="form-group">
-                <label for="title">P&oacute;ster</label>
-               <input type="text" name="poster" id="poster" value="{{$pelicula->poster}}" class="form-control">
+                <img src="{{asset('storage/' . $pelicula->poster)}}" style="height:200px"/>
+                <label for="avatar">Seleccionar imagen del poster:</label>
+                <input type="file" id="poster" name="poster">
             </div>
 
              <div class="form-group">
