@@ -27,11 +27,16 @@
             @endif
         </p>
 
-        @if($pelicula['rented'])
-            <a class="btn btn-danger" href="#">Devolver pel&iacute;cula</a>
-        @else
-            <a class="btn btn-primary" href="#">Alquilar pel&iacute;cula</a>
-        @endif
+        <form action="{{ url('/catalog/changedRented',array('id' => $pelicula->id )) }}" method="POST">
+            {{method_field('PUT')}}
+            @csrf
+
+            @if($pelicula->rented)
+                <input class="btn btn-primary" type="submit" value="Devolver pelicula">
+            @else
+                <input class="btn btn-primary" type="submit" value="Alquilar pelicula">
+            @endif
+        </form>
         <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $pelicula->id ) }}">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             Editar pel&iacute;cula</a>

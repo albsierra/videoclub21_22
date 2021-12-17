@@ -59,4 +59,10 @@ class CatalogController extends Controller
         $pelicula->save();
         return redirect(url('/catalog/show', array('id' => $pelicula->id)));
     }
+    public function cambiar($id){
+        $pelicula = Movie::find($id);
+        $pelicula->rented = !$pelicula->rented;
+        $pelicula->save();
+        return redirect(url('/catalog/show', array('id' => $pelicula->id)));
+    }
 }
