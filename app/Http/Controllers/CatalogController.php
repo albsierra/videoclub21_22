@@ -11,7 +11,10 @@ class CatalogController extends Controller
     {
         $peliculas = Movie::all();
         return view('catalog.index',
-        array('arrayPeliculas' => $peliculas));
+        array(
+            'header' => 'Listado de películas',
+            'arrayPeliculas' => $peliculas)
+        );
     }
 
     public function getShow($id)
@@ -19,6 +22,7 @@ class CatalogController extends Controller
         $pelicula = Movie::find($id);
         return view('catalog.show',
         array(
+            'header' => 'Pelicula',
             'pelicula' => $pelicula));
     }
 
@@ -55,6 +59,13 @@ class CatalogController extends Controller
         $pelicula->director = $request->input('director');
         $pelicula->synopsis = $request->input('synopsis');
         $pelicula->poster = $request->input('poster');
+        $pelicula->save();
+        return redirect(url('/catalog/show', array('id' => $pelicula->id)));
+    }
+
+    public function cambiar($id){
+        $pelicula = Movie::find($id);
+        $pelicula->rented = !$pelicula->rented;
         $pelicula->save();
         return redirect(url('/catalog/show', array('id' => $pelicula->id)));
     }
