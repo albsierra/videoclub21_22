@@ -18,7 +18,7 @@ use App\Http\Controllers\CatalogController;
 Route::get('/', [HomeController::class, 'getHome']);
 
 Route::group(['prefix' => 'catalog', ['middleware' => 'auth']], function () {
-    Route::get('/', [CatalogController::class, 'getIndex']);
+    Route::get('/', [CatalogController::class, 'getIndex'])->name('dashboard');
     Route::get('/show/{id}', [CatalogController::class, 'getShow']);
 
     Route::get('/create', [CatalogController::class, 'getCreate']);
@@ -26,6 +26,7 @@ Route::group(['prefix' => 'catalog', ['middleware' => 'auth']], function () {
 
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit']);
+    Route::put('/changeRented/{id}', [CatalogController::class, 'changeRented']);
 
 });
 

@@ -5,29 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
-class CatalogController extends Controller
-{
-    public function getIndex()
-    {
+class CatalogController extends Controller{
+    public function changeRented($id){
+        $pelicula = Movie::findOrFail($id);
+        $pelicula->rented=!$pelicula->rented;
+
+        $pelicula->save();
+        return redirect(url('catalog/show',array('id'=>$pelicula->id)));
+    }
+    public function getIndex() {
         $peliculas = Movie::all();
         return view('catalog.index',
-        array('arrayPeliculas' => $peliculas));
+        array('header'=>'listado de Peliculas','arrayPeliculas' => $peliculas));
     }
 
-    public function getShow($id)
-    {
+    public function getShow($id) {
         return view('catalog.show',
         array(
             'pelicula' => Movie::find($id)));
     }
 
-    public function getCreate()
-    {
+    public function getCreate() {
         return view('catalog.create');
     }
 
-    public function getEdit($id)
-    {
+    public function getEdit($id) {
         return view('catalog.edit',
         array(
             'id' => $id,

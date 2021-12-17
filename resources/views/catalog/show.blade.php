@@ -2,8 +2,6 @@
 
 @section('content')
 
-@section('content')
-
 <div class="row">
 
     <div class="col-sm-4">
@@ -28,7 +26,12 @@
         </p>
 
         @if($pelicula['rented'])
-            <a class="btn btn-danger" href="#">Devolver pel&iacute;cula</a>
+
+            <form action="{{ url('/catalog/changeRented/'. $pelicula->id) }}" method="POST">
+                {{method_field('PUT')}}
+	            @csrf
+                <button type="submit">Devolver Pelicula</button>
+            </form>
         @else
             <a class="btn btn-primary" href="#">Alquilar pel&iacute;cula</a>
         @endif
@@ -39,7 +42,5 @@
 
     </div>
 </div>
-
-@stop
 
 @stop
