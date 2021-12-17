@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CatalogController extends Controller
 {
@@ -54,7 +55,12 @@ class CatalogController extends Controller
         $pelicula->title = $request->input('title');
         $pelicula->year = $request->input('year');
         $pelicula->director = $request->input('director');
-        $pelicula->poster = $request->input('poster');
+
+        if($request->exists('poster')) {
+            $foto = $request->file('poster');
+            $pelicula->poster = Storage::disk('public')->putFile('posters',$foto);
+        }
+
         $pelicula->synopsis = $request->input('synopsis');
         $pelicula->save();
         return redirect(url('/catalog/show', array('id' => $pelicula->id)));
