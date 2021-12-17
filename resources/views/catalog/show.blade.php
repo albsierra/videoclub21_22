@@ -28,9 +28,17 @@
         </p>
 
         @if($pelicula['rented'])
-            <a class="btn btn-danger" href="#">Devolver pel&iacute;cula</a>
+            <form action="{{ url('/catalog/changeRented', array('id' => $pelicula->id)) }}" method="POST">
+                {{method_field('PUT')}}
+                @csrf
+                <input value="Devolver pelicula" type="submit" class="btn btn-danger">
+            </form>
         @else
-            <a class="btn btn-primary" href="#">Alquilar pel&iacute;cula</a>
+            <form action="{{ url('/catalog/changeRented', array('id' => $pelicula->id)) }}" method="POST">
+                {{method_field('PUT')}}
+                @csrf
+                <input value="Alquilar pelicula" type="submit" class="btn btn-primary">
+            </form>
         @endif
         <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $pelicula->id ) }}">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
