@@ -29,6 +29,8 @@ Route::group(['prefix' => 'catalog', 'middleware' => 'auth'], function () {
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit']);
 
+    Route::put('/changeRented/{id}',[CatalogController::class,'putchangeRented']);
+
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
