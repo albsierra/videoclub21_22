@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\CentroController;
+use App\Http\Controllers\API\RecursoController;
+use App\Http\Controllers\CatalogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::GET('peliculas/search/{search}', [RecursoController::class, 'search']);
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
