@@ -26,7 +26,7 @@ class MovieController extends Controller
             'page' => 1,
             'r' => 'json'
         ]);
-        return $response;
+        return response()->json(json_decode($response));
     }
 
     /**
