@@ -6,9 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
 {
+
+    public function search(Request $response, $search){
+        $host = 'www.omdbapi.com';
+        $response = Http::get('http://' . $host . '/', [
+            'apikey' => env('API_KEY'),
+            's' => $search,
+            'page' => 1,
+            'r' => 'json'
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
