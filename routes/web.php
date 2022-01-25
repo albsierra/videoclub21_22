@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\MovieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
@@ -28,7 +29,6 @@ Route::group(['prefix' => 'catalog', 'middleware' => 'auth'], function () {
 
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit']);
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit']);
-
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
