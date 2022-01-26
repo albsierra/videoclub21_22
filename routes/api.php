@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 Route::apiResource('movies',MovieController::class);
-Route::apiResource('movies/search/{search}', MovieController::class);
+Route::get('movies/search/{search}', [MovieController::class, 'search   ']);
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
