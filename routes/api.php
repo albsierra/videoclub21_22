@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\API\MovieController;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Validation\ValidationException;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config;
@@ -19,7 +21,27 @@ use Tqdev\PhpCrudApi\Config;
 |
 */
 
-Route::apiResource('movies', MovieController::class);
+Route::post('/tokens/createp/', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return response()->json([
+        'token_type' => 'Bearer',
+        'access_token' => $user->createToken('token_name')->plainTextToken // token name you can choose for your self or leave blank if you like to
+    ]);
+});
+
+Route::middleware('auth:sanctum')->apiResource('movies', MovieController::class);
 
 Route::get('movies/search/{search}', [MovieController::class, 'search']);
 

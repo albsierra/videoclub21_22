@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
     {
         User::truncate();
         // Crear 2 registros de usuario
-        \App\Models\User::factory(2)->create();
+        \App\Models\User::factory(10)->create();
         // Crear al administrador
         /*
         $admin = new User();
