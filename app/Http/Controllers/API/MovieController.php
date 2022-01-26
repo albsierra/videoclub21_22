@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Http\Resources\MovieResource;
+
 
 class MovieController extends Controller
 {
@@ -16,7 +18,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        return MovieResource::collection(Movie::paginate());
     }
 
     /**
@@ -27,7 +29,11 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $movie = json_decode($request->getContent(), true);
+
+        $movie = Movie::create($movie);
+
+        return new MovieResource($movie);
     }
 
     public function search($search){
@@ -50,7 +56,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        //
+        return new MovieResource($movie);
     }
 
     /**
@@ -62,7 +68,10 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $movieData = json_decode($request->getContent(), true);
+        $movie->update($movieData);
+
+        return new MovieResource($movie);
     }
 
     /**
@@ -73,6 +82,6 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
     }
 }
