@@ -21,13 +21,19 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::apiResource('peliculas', MovieController::class)
+    ->parameters([
+        'peliculas'=>'movie'
+    ]);
+
+    Route::get('peliculas/search/{search}',[MovieController::class, 'search']);
+
+});
 
 
-Route::apiResource('peliculas', MovieController::class)
-->parameters([
-    'peliculas'=>'movie'
-]);
-Route::get('peliculas/search/{search}',[MovieController::class, 'search']);
+
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -48,9 +54,7 @@ Route::post('/tokens/create', function (Request $request) {
     ]);
 });
 
-Route::middleware('auth:sanctum')->get('peliculas/search/{search}', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
