@@ -22,6 +22,8 @@ use Tqdev\PhpCrudApi\Config;
 
 Route::apiResource('movies', MovieController::class);
 
+Route::get('peliculas/search/{search}', [MovieController::class, "search"]);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
