@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +16,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        self::seedCatalog();
-        self::seedUsers();
+        /*if(App::environment()>'local'){
+            self::seedCatalog();
+            self::seedUsers();
+        }elseif(Movie::count()>0){
+
+        }*/
+        User::create([
+            'name' => 'Alejandro',
+            'email' => '1794842@alu.murciaeduca.es',
+            'password' => bcrypt('password'),
+            'administrador' => true,
+            'proveedor' => false
+        ]);
+        User::create([
+            'name' => 'Alberto',
+            'email' => 'alberto.sierra@alu.murciaeduca.es',
+            'password' => bcrypt('password'),
+            'administrador' => false,
+            'proveedor' => true
+        ]);
+        User::create([
+            'name' => 'Ususario',
+            'email' => 'sinPermisos@peliculas.com',
+            'password' => bcrypt('password'),
+            'administrador' => false,
+            'proveedor' => false
+        ]);
+        \App\Models\User::factory(10)->create();
         $this->command->info('Tabla catálogo inicializada con datos!');
     }
 
