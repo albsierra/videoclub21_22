@@ -32,8 +32,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
-
-
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -53,8 +51,6 @@ Route::post('/tokens/create', function (Request $request) {
         'access_token' => $user->createToken('token_name')->plainTextToken // token name you can choose for your self or leave blank if you like to
     ]);
 });
-
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

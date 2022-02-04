@@ -24,24 +24,31 @@ class DatabaseSeeder extends Seeder
     private static function seedUsers()
     {
         User::truncate();
-        // Crear 2 registros de usuario
-        \App\Models\User::factory(2)->create();
-        // Crear al administrador
-        /*
-        $admin = new User();
-        $admin->name = env('ADMIN_NAME', 'admin');
-        $admin->email = env('ADMIN_EMAIL', 'email.email.com');
-        $admin->password = bcrypt(env('ADMIN_PASSWORD', 'alumno'));
-        $admin->save();
-        */
-        //Utilizando el método create()
+        \App\Models\User::factory(3)->create();
+
+        //Datos en el .env
 
         User::create([
-            'name' => env('ADMIN_NAME', 'admin'),
-            'email' => env('ADMIN_EMAIL', 'email.email.com'),
+            'name' => env('ADMIN_NAME', 'joseluis'),
+            'email' => env('ADMIN_EMAIL', 'joseluis@gmail.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
+            'administrador' => true
         ]);
 
+        //No voy a poner los datos en el .env, ya que como es un ejercicio no lo siento necesario
+
+        User::create([
+            'name' => 'profesor',
+            'email' => 'profesor@profesor.com',
+            'password' => 'profesor',
+            'proveedor' => true
+        ]);
+
+        User::create([
+            'name' => 'sinPermisos',
+            'email' => 'sinPermisos@peliculas.com',
+            'password' => 'sinPermisos'
+        ]);
     }
 
     private static function seedCatalog()
