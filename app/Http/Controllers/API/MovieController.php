@@ -11,12 +11,22 @@ use App\Http\Resources\MovieResource;
 class MovieController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Movie::class, 'movie');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+
         return MovieResource::collection(Movie::paginate());
     }
 
@@ -76,12 +86,35 @@ class MovieController extends Controller
 
         $host = 'www.omdbapi.com';
         $response = Http::get('http://' . $host . '/', [
-            'apikey' => env('API_KEY'),
+            'apikey' => env('OMDBAPI_KEY'),
             's' => $search,
             'page' => 1,
             'r' => 'json'
         ]);
         return response()->json(json_decode($response));
+
+    }
+
+    public function createOMDB($idFilm){
+
+        $host = 'www.omdbapi.com';
+        $response = Http::get('http://' . $host . '/', [
+            'apikey' => env('OMDBAPI_KEY'),
+            'i' => $idFilm,
+            'r' => 'json'
+        ]);
+        $dataMovie = json_decode($response, true);
+
+        $movie = new Movie();
+        $movie->title = $dataMovie['Title'];
+        $movie->year = $dataMovie['Year'];
+        $movie->director = $dataMovie['Director'];
+        $movie->poster = $dataMovie['Poster'];
+        $movie->synopsis = $dataMovie['Plot'];
+
+
+
+        return new MovieResource($movie);
 
     }
 }
