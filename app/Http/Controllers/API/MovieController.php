@@ -10,6 +10,18 @@ use App\Http\Resources\MovieResource;
 
 class MovieController extends Controller
 {
+
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Movie::class, 'movie');
+    }
+
     /**
      * Display a listing of the resource.
      *

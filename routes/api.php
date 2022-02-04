@@ -28,6 +28,7 @@ Route::group( ['middleware' => 'auth:sanctum'],function () {
         'peliculas' => 'movie'
     ]);
 
+
 Route::get('/peliculas/search/{search}', [MovieController::class, 'search']);
 
 });
