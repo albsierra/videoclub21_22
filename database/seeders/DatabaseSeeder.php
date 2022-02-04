@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
     private static function seedUsers()
     {
-        User::truncate();
+        //User::truncate();
         // Crear 2 registros de usuario
-        \App\Models\User::factory(2)->create();
+        //\App\Models\User::factory(2)->create();
         // Crear al administrador
         /*
         $admin = new User();
@@ -36,13 +36,35 @@ class DatabaseSeeder extends Seeder
         */
         //Utilizando el método create()
 
-        User::create([
-            'name' => env('ADMIN_NAME', 'admin'),
-            'email' => env('ADMIN_EMAIL', 'email.email.com'),
-            'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
-        ]);
+        foreach (self::$arrayUsuarios as $usuarios) {
+            $usuarios['password']=bcrypt($usuarios['password']);
+            User::create(
+                $usuarios
+            );
+        }
+
 
     }
+
+    private static $arrayUsuarios = array(
+        array(
+            'name' => "Jose Arjona Ortiz",
+            'email' => "1837071@alu.murciaeduca.es",
+            'password' => 'alumno',
+            'administrador' => true
+        ),
+        array(
+            'name' => "Alberto Sierra",
+            'email' => "alberto.sierra@alu.murciaeduca.es",
+            'password' => 'profesor',
+            'proveedor' => true
+        ),
+        array(
+            'name' => "Antonio Martinez",
+            'email' => "sinPermisos@peliculas.com",
+            'password' => 'sinpermisos'
+        )
+    );
 
     private static function seedCatalog()
     {
