@@ -19,7 +19,7 @@ class MoviePolicy
 
     public function before(User $user, $ability)
     {
-        if ($user->isAdministrator()) {
+        if ($user->esAdministrador()) {
             return true;
         }
     }
@@ -49,7 +49,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->proveedor == true;
     }
 
     /**
@@ -73,7 +73,7 @@ class MoviePolicy
      */
     public function delete(User $user, Movie $movie)
     {
-        //
+        return $user->proveedor == true;
     }
 
     /**
