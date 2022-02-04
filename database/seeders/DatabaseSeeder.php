@@ -17,11 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         /*if(App::environment()>'local'){
-            self::seedCatalog();
-            self::seedUsers();
+
         }elseif(Movie::count()>0){
 
         }*/
+        self::seedCatalog();
+        self::seedUsers();
         User::create([
             'name' => 'Alejandro',
             'email' => '1794842@alu.murciaeduca.es',

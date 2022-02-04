@@ -7,6 +7,7 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Resources\MovieResource;
+use App\Policies\MoviePolicy;
 
 class MovieController extends Controller
 {
@@ -29,9 +30,8 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movie = json_decode($request->getContent(), true);
-
+        //$this->authorize('create', $movie);
         $movie = Movie::create($movie);
-
         return new MovieResource($movie);
     }
 
@@ -69,7 +69,11 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        //return $movie->title;
+        $this->authorize('delete', $movie);
+
         $movie->delete();
+
     }
 
     public function search($search){

@@ -10,6 +10,13 @@ class MoviePolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        if ($user->esAdministrador()) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -41,7 +48,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->proveedor;
     }
 
     /**
@@ -65,7 +72,7 @@ class MoviePolicy
      */
     public function delete(User $user, Movie $movie)
     {
-        //
+        return $user->proveedor;
     }
 
     /**
