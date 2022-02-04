@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        Centro::class => CentroPolicy::class,
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 

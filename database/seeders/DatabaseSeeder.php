@@ -27,20 +27,22 @@ class DatabaseSeeder extends Seeder
         // Crear 2 registros de usuario
         \App\Models\User::factory(2)->create();
         // Crear al administrador
-        /*
-        $admin = new User();
-        $admin->name = env('ADMIN_NAME', 'admin');
-        $admin->email = env('ADMIN_EMAIL', 'email.email.com');
-        $admin->password = bcrypt(env('ADMIN_PASSWORD', 'alumno'));
-        $admin->save();
-        */
-        //Utilizando el método create()
 
-        User::create([
-            'name' => env('ADMIN_NAME', 'admin'),
-            'email' => env('ADMIN_EMAIL', 'email.email.com'),
-            'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
-        ]);
+        /*$admin = new User();
+        $admin->name = env('ADMIN_NAME', 'Cristan');
+        $admin->email = env('ADMIN_EMAIL', 'cristian@email.com');
+        $admin->password = bcrypt(env('ADMIN_PASSWORD', 'alumno'));
+        $admin->administrador = true;
+        $admin->save();
+
+        Utilizando el método create()*/
+
+        foreach (self::$arrayUsuarios as $usuario){
+            $usuario['password'] = bcrypt($usuario['password']);
+            User::create(
+                $usuario
+            );
+        }
 
     }
 
@@ -58,6 +60,26 @@ class DatabaseSeeder extends Seeder
             $p->save();
         }
     }
+
+    private static $arrayUsuarios = array(
+        array(
+            'name' => 'cristian',
+            'email' => 'cristian@email.com',
+            'password' => 'cristian',
+            'administrador' => true
+        ),
+        array(
+            'name' => 'profesor',
+            'email' => 'profesor@email.com',
+            'password' => 'profesor',
+            'proveedor' => true
+        ),
+        array(
+            'name' => 'noPermisos',
+            'email' => 'sinPermisos@peliculas.com',
+            'password' => 'augusto'
+        )
+    );
 
 
     private static $arrayPeliculas = array(
