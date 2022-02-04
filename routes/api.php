@@ -27,6 +27,8 @@ Route::group( ['middleware' => 'auth:sanctum'],function () {
 
     Route::get('movies/search/{search}', [MovieController::class, 'search']);
 
+    Route::post('movies/newOMDB/{idFilm}', [MovieController::class, 'createOMDB']);
+
 });
 
 Route::post('/tokens/create', function (Request $request) {
