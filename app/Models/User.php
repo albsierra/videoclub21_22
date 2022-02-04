@@ -12,6 +12,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function esProveedor()
+    {
+        return $this->proveedor;
+    }
+
+    public function esAdministrador()
+    {
+        return $this->administrador;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +31,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'proveedor',
+        'administrador'
     ];
 
     /**
