@@ -49,7 +49,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        return $user->proveedor == true;
+        return $user->proveedor;
     }
 
     /**
@@ -73,7 +73,7 @@ class MoviePolicy
      */
     public function delete(User $user, Movie $movie)
     {
-        return $user->proveedor == true;
+        return $user->proveedor;
     }
 
     /**
