@@ -19,6 +19,7 @@ class MovieController extends Controller
     {
         $this->authorizeResource(Movie::class, 'movie');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -99,7 +100,7 @@ class MovieController extends Controller
 
         $host = 'www.omdbapi.com';
         $response = Http::get('http://' . $host . '/', [
-            'apikey' => env('OMDBAPI_KEY'),
+            'apikey' => env('API_KEY'),
             'i' => $idFilm,
             'r' => 'json'
         ]);

@@ -18,13 +18,6 @@ class MoviePolicy
         if ($user->esAdministrador()) {
             return true;
         }
-        if ($user->esProveedor()) {
-            if ($ability == "delete") {
-                return true;
-            }else if($ability == "create"){
-                return true;
-            }
-        }
     }
 
     /**
@@ -58,7 +51,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        return false;
+        return $user->esProveedor();
     }
 
     /**
@@ -82,7 +75,7 @@ class MoviePolicy
      */
     public function delete(User $user, Movie $movie)
     {
-        return false;
+        return $user->esProveedor();
     }
 
     /**
