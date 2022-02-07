@@ -30,6 +30,7 @@ class MovieController extends Controller
     {
 
         $this->authorize('create', Movie::class);
+
         $movie = json_decode($request->getContent(), true);
 
         $movie = Movie::create($movie);
@@ -59,7 +60,9 @@ class MovieController extends Controller
     {
 
         $this->authorize('update', $movie);
+
         $movieData = json_decode($request->getContent(), true);
+
         $movie->update($movieData);
 
         return new MovieResource($movie);
