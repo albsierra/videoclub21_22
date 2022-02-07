@@ -40,8 +40,21 @@ class DatabaseSeeder extends Seeder
             'name' => env('ADMIN_NAME', 'admin'),
             'email' => env('ADMIN_EMAIL', 'email.email.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
+            'administrador' => '1',
         ]);
 
+        User::create([
+            'name' => env('PROVEEDOR_NAME', 'proveedor'),
+            'email' => env('PROVEEDOR_EMAIL', 'email.email.com'),
+            'password' => bcrypt(env('PROVEEDOR_PASSWORD', 'proveedor')),
+            'proveedor' => '1',
+        ]);
+
+        User::create([
+            'name' => env('SINPERMISOS_NAME', 'sinpermisos'),
+            'email' => env('SINPERMISOS_EMAIL', 'email.email.com'),
+            'password' => bcrypt(env('SINPERMISOS_PASSWORD', 'sinpermisos')),
+        ]);
     }
 
     private static function seedCatalog()
