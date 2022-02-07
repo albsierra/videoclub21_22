@@ -48,7 +48,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        return $user->proveedor;
+        return $user->proveedor; //  $user->proveedor
     }
 
     /**

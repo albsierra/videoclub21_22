@@ -30,7 +30,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movie = json_decode($request->getContent(), true);
-        //$this->authorize('create', $movie);
+        $this->authorize('create', $movie);
         $movie = Movie::create($movie);
         return new MovieResource($movie);
     }
