@@ -15,6 +15,7 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return MovieResource::collection(Movie::paginate());
@@ -28,6 +29,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Movie::class);
         $movie = json_decode($request->getContent(), true);
 
         $movie = Movie::create($movie);
@@ -55,6 +57,7 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        $this->authorize('update', $movie);
         $movieData = json_decode($request->getContent(), true);
         $movie->update($movieData);
 
@@ -69,6 +72,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $this->authorize('delete', $movie);
         $movie->delete();
     }
 

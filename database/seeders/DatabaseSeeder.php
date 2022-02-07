@@ -23,26 +23,37 @@ class DatabaseSeeder extends Seeder
 
     private static function seedUsers()
     {
-        User::truncate();
+        //User::truncate();
         // Crear 2 registros de usuario
-        \App\Models\User::factory(2)->create();
-        // Crear al administrador
-        /*
-        $admin = new User();
-        $admin->name = env('ADMIN_NAME', 'admin');
-        $admin->email = env('ADMIN_EMAIL', 'email.email.com');
-        $admin->password = bcrypt(env('ADMIN_PASSWORD', 'alumno'));
-        $admin->save();
-        */
-        //Utilizando el método create()
+        //\App\Models\User::factory(2)->create();
 
-        User::create([
-            'name' => env('ADMIN_NAME', 'admin'),
-            'email' => env('ADMIN_EMAIL', 'email.email.com'),
-            'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
-        ]);
-
+        foreach (self::$arrayUsuarios as $usuario) {
+            $usuario['password']=bcrypt($usuario['password']);
+            User::create(
+                $usuario
+            );
+        }
     }
+
+    private static $arrayUsuarios = array(
+        array(
+            'name' => 'Javier Murcia',
+            'email' => 'javiermurcia17@gmail.com',
+            'password' => 'alumno',
+            'administrador' => true
+        ),
+        array(
+            'name' => 'Alberto Sierra',
+            'email' => 'alberto.sierra@murciaeduca.es',
+            'password' => 'profesor',
+            'proveedor' => true
+        ),
+        array(
+            'name' => 'Sin Permisos',
+            'email' => 'sinPermisos@peliculas.com',
+            'password' => 'sinpermisos'
+        )
+    );
 
     private static function seedCatalog()
     {

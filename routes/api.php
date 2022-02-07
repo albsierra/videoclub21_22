@@ -25,7 +25,7 @@ Route::group( ['middleware' => 'auth:sanctum'],function () {
 
     Route::apiResource('peliculas', MovieController::class)
     ->parameters([
-        'peliculas' => 'movie'
+        'peliculas' => 'movies'
     ]);
 
 Route::get('/peliculas/search/{search}', [MovieController::class, 'search']);
@@ -33,6 +33,7 @@ Route::get('/peliculas/search/{search}', [MovieController::class, 'search']);
 });
 
 Route::post('/tokens/create', function (Request $request) {
+
     $request->validate([
         'email' => 'required|email',
         'password' => 'required'
