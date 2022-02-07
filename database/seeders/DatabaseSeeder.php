@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        self::seedCatalog();
-        self::seedUsers();
-        $this->command->info('Tabla catálogo inicializada con datos!');
+        if(App::environment('local')){
+            self::seedCatalog();
+            self::seedUsers();
+            $this->command->info('Tabla catálogo inicializada con datos!');
+        }else{
+            if(Movie::count() == 0){
+
+                self::seedCatalog();
+
+            }
+        }
     }
 
 
@@ -36,10 +45,34 @@ class DatabaseSeeder extends Seeder
         */
         //Utilizando el método create()
 
-        User::create([
+        /*User::create([
             'name' => env('ADMIN_NAME', 'admin'),
             'email' => env('ADMIN_EMAIL', 'email.email.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
+        ]);*/
+
+        User::create([
+            'name' => "Jose San Fulgencio Pérez",
+            'email' => "administrador@peliculas.com",
+            'password' => bcrypt("administrador"),
+            'administrador' => true,
+            'proveedor' => false,
+        ]);
+
+        User::create([
+            'name' => "Alberto Sierra",
+            'email' => "proveedor@peliculas.com",
+            'password' => bcrypt("proveedor"),
+            'administrador' => false,
+            'proveedor' => true,
+        ]);
+
+        User::create([
+            'name' => "Usuario sin permisos",
+            'email' => "sinPermisos@peliculas.com",
+            'password' => bcrypt("sinPermisos"),
+            'administrador' => false,
+            'proveedor' => false,
         ]);
 
     }

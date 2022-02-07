@@ -21,7 +21,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'proveedor',
+        'administrador'
     ];
+
+    public function esAdministrador() {
+        return $this->administrador;
+    }
+
+    public function esProveedor() {
+        return $this->proveedor;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +51,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }
