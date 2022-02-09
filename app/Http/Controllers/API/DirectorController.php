@@ -27,7 +27,13 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Director::class);
+
+        $movie = json_decode($request->getContent(), true);
+
+        $movie = Director::create($movie);
+
+        return new DirectorResource($movie);
     }
 
     /**
@@ -50,7 +56,13 @@ class DirectorController extends Controller
      */
     public function update(Request $request, Director $director)
     {
-        //
+        $this->authorize('update', $director);
+
+        $directorData = json_decode($request->getContent(), true);
+
+        $director->update($directorData);
+
+        return new DirectorResource($director);
     }
 
     /**
@@ -61,6 +73,8 @@ class DirectorController extends Controller
      */
     public function destroy(Director $director)
     {
-        //
+        $this->authorize('delete', $director);
+
+        $director->delete();
     }
 }
