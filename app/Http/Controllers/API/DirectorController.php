@@ -64,7 +64,25 @@ class DirectorController extends Controller
         //
     }
 
-    public function importDirectores(Director $director, Movie $peliclas){
-        return 'a';
+    public function importDirectores(){
+        $peliculas = Movie::all();
+        foreach ($peliculas as $pelicula){
+            $directorStr = $pelicula->director;
+
+            // Sacar el nombre y apellidos
+            $espacios = strpos($directorStr, ' ');
+            $nombre = substr($directorStr, 0, $espacios+1);
+            $apellidos = substr($directorStr, $espacios);
+
+            if($director = !Director::existeDirector($nombre, $apellidos)){
+                $directorStr = Director::create([
+                    'nombre' => $nombre,
+                    'apellidos' =>$apellidos
+                ]);
+            }
+            /*$pelicula->id_director = $director->id_director;
+            $pelicula->save();*/
+        }
+
     }
 }

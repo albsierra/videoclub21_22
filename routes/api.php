@@ -34,7 +34,7 @@ Route::get('/peliculas/search/{search}', [MovieController::class, 'search']);
 });
 
 Route::apiResource('director', DirectorController::class);
-Route::get('/api/director/import', [DirectorController::class, 'importDirectores']);
+Route::post('/director/import', [DirectorController::class, 'importDirectores']);
 
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
