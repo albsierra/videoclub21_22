@@ -74,14 +74,15 @@ class DirectorController extends Controller
             $nombre = substr($directorStr, 0, $espacios+1);
             $apellidos = substr($directorStr, $espacios);
 
-            if($director = !Director::existeDirector($nombre, $apellidos)){
-                $directorStr = Director::create([
+            if(!$director = Director::existeDirector($nombre, $apellidos)){
+                $director = Director::create([
                     'nombre' => $nombre,
                     'apellidos' =>$apellidos
                 ]);
             }
-            /*$pelicula->id_director = $director->id_director;
-            $pelicula->save();*/
+            //$pelicula->id_director = $director->id_director;
+            $pelicula->elDirector()->associate($director);
+            $pelicula->save();
         }
 
     }

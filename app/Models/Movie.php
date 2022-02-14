@@ -19,7 +19,7 @@ class Movie extends Model
         'synopsis'
     ];
 
-    public function director(){
-        return $this->belongsTo(Director::class);
+    public function elDirector(){
+        return $this->belongsTo(Director::class, 'director_id');
     }
 }
