@@ -36,6 +36,14 @@ class CatalogController extends Controller
             'pelicula' => Movie::find($id)));
     }
 
+    public function putRented($id)
+    {
+        $pelicula = Movie::findOrFail($id);
+        $pelicula->rented = !$pelicula->rented;
+        $pelicula->save();
+        return redirect(url('/catalog/show', array('id' => $pelicula->id)));
+    }
+
     public function postCreate(Request $request)
     {
         $pelicula = new Movie;
